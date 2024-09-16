@@ -4,11 +4,9 @@ import {
   GroupAdd,
   Logout,
   Notifications,
-  Search,
 } from "@mui/icons-material";
 import {
   Avatar,
-  Backdrop,
   Badge,
   ListItemText,
   Menu,
@@ -17,8 +15,8 @@ import {
   Stack,
   styled,
 } from "@mui/material";
-import PropTypes from "prop-types";
-import { Suspense, useEffect, useMemo } from "react";
+
+import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { mainColor } from "../../constants/constants";
@@ -30,11 +28,8 @@ import {
   setCreatingNewGroup,
   setHasNotification,
   setIsProfileOpen,
-  setSearching
+  setSearching,
 } from "../../redux/reducers/uiReducer";
-import AddGroup from "../specific/AddGroup";
-import Notification from "../specific/Notification";
-import Profile from "../specific/Profile";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -47,17 +42,11 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-const HeaderMenuForMobileAndTablet = ({ anchorE1, closeHeaderMobileMenu }) => {
+const HeaderMenuForTablet = ({ anchorE1, closeHeaderMobileMenu }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const {
-    isMobileAndTabletHeaderMenuOpen,
-    hasNotification,
-    isCreatingNewGroup,
-    isSearching,
-    isProfileOpen,
-  } = useSelector((state) => state.ui);
+  const { isMobileAndTabletHeaderMenuOpen } = useSelector((state) => state.ui);
   const { user } = useSelector((state) => state.auth);
   const { notificationCount } = useSelector((state) => state.chat);
 
@@ -159,30 +148,8 @@ const HeaderMenuForMobileAndTablet = ({ anchorE1, closeHeaderMobileMenu }) => {
       >
         <MenuList sx={{ width: "12rem", p: "3px" }}>{menuItems}</MenuList>
       </Menu>
-      {hasNotification && (
-        <Suspense fallback={<Backdrop open />}>
-          <Notification />
-        </Suspense>
-      )}
-      {isCreatingNewGroup && (
-        <Suspense fallback={<Backdrop open />}>
-          <AddGroup />
-        </Suspense>
-      )}
-      {isSearching && (
-        <Suspense fallback={<Backdrop open />}>
-          <Search />
-        </Suspense>
-      )}
-      {isProfileOpen && (
-        <Suspense fallback={<Backdrop open />}>
-          <Profile />
-        </Suspense>
-      )}
     </>
   );
 };
 
-
-
-export default HeaderMenuForMobileAndTablet;
+export default HeaderMenuForTablet;

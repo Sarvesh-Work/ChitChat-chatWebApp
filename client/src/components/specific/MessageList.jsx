@@ -6,14 +6,11 @@ import { useDispatch } from "react-redux";
 import { mainColor } from "../../constants/constants";
 import { setIsMobileAndTabletHeaderMenuOpen } from "../../redux/reducers/uiReducer";
 import Loader from "../layout/Loader";
+import MobileHeader from "../layout/MobileHeader";
 import MessageItems from "../Shared/MessageItems";
 import { SearchBox, SearchCompo } from "../styles/StyleComponent";
-import MobileHeader from "../layout/MobileHeader";
-import ClipLoader from "react-spinners/ClipLoader";
 
-const HeaderMenuForMobileAndTablet = lazy(() =>
-  import("../menu/HeaderMenuForMobileAndTablet")
-);
+const HeaderMenuForTablet = lazy(() => import("../menu/HeaderMenuForTablets"));
 
 const MessageList = ({
   w = "100%",
@@ -95,7 +92,7 @@ const MessageList = ({
         }}
         height="100%"
       >
-        <HeaderMenuForMobileAndTablet
+        <HeaderMenuForTablet
           anchorE1={anchor}
           closeHeaderMobileMenu={closeHeaderMobileMenu}
         />
@@ -184,7 +181,7 @@ const MessageList = ({
           </Stack>
         </Box>
         <Stack overflow="auto" mt="1rem" height="100%">
-          {isLoadingChats? (
+          {isLoadingChats ? (
             <Loader />
           ) : dataLoaded && getFilteredChats()?.length === 0 ? (
             <Stack color={mainColor} padding="20px" textAlign="center">
