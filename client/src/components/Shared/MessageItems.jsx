@@ -65,10 +65,26 @@ function MessageItems({
   }, [userTyping, updateLastMessageFunc, lastMessage, _id]);
 
   const time = useMemo(() => {
-    return updateLastMessage.length === 0
-      ? lastMessage.createdAt
-      : updateLastMessageTimeFun || lastMessage?.createdAt;
+    const lastMessageTime = lastMessage?.createdAt;
+    const updateTime = updateLastMessageTimeFun;
+
+    return updateTime || lastMessageTime || moment().format(); // fallback to current time if none
   }, [lastMessage, updateLastMessageTimeFun]);
+
+  const formattedTime = useMemo(() => {
+    const now = moment();
+    const messageTime = moment(time);
+
+    if (messageTime.isSame(now, "day")) {
+      return messageTime.format("h:mm A");
+    }
+
+    if (messageTime.isSame(now.subtract(1, "day"), "day")) {
+      return "Yesterday";
+    }
+
+    return messageTime.format("DD/MM/YYYY");
+  }, [time]);
 
   return (
     <Stack height="100%" width="100%">
@@ -121,10 +137,7 @@ function MessageItems({
                 >
                   {name}
                 </Typography>
-                <Typography color="#858585">
-                  {updateLastMessageTimeFun ||
-                    (lastMessage?.createdAt && moment(time).fromNow())}
-                </Typography>
+                <Typography color="#858585">{formattedTime}</Typography>
               </Stack>
 
               <Stack direction="row" justifyContent="space-between">

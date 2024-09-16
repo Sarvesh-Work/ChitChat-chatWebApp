@@ -61,21 +61,13 @@ function setupSocketEvents(io) {
 
     socket.on(START_TYPING, ({ members, chatId }) => {
       const membersSockets = getSocketIds(members);
-      console.log("Start typing event received", {
-        chatId,
-        members,
-        membersSockets,
-      });
+
       socket.to(membersSockets).emit(START_TYPING, { chatId });
     });
 
     socket.on(STOP_TYPING, ({ members, chatId }) => {
       const membersSockets = getSocketIds(members);
-      console.log("Stop typing event received", {
-        chatId,
-        members,
-        membersSockets,
-      });
+
       socket.to(membersSockets).emit(STOP_TYPING, { chatId });
     });
 
@@ -108,4 +100,3 @@ const emitEvent = (req, event, users, data) => {
 };
 
 export { emitEvent, setupSocketEvents };
-

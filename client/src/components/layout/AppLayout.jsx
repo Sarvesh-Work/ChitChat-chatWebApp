@@ -151,6 +151,7 @@ const AppLayout = (WrappedComponent) => {
             md={4}
             lg={3}
             sx={{ display: { xs: "none", sm: "block" } }}
+            height="100%"
           >
             <MessageList
               chats={filteredChats}

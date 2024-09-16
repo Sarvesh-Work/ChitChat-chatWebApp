@@ -9,6 +9,7 @@ import Loader from "../layout/Loader";
 import MessageItems from "../Shared/MessageItems";
 import { SearchBox, SearchCompo } from "../styles/StyleComponent";
 import MobileHeader from "../layout/MobileHeader";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const HeaderMenuForMobileAndTablet = lazy(() =>
   import("../menu/HeaderMenuForMobileAndTablet")
@@ -44,6 +45,8 @@ const MessageList = ({
     }
     return chats;
   };
+
+  const load = true;
 
   const openHeaderMobileMenu = (e) => {
     setAnchor(e.currentTarget); // Set the anchor for the menu
@@ -90,6 +93,7 @@ const MessageList = ({
         sx={{
           py: "10px",
         }}
+        height="100%"
       >
         <HeaderMenuForMobileAndTablet
           anchorE1={anchor}
@@ -117,7 +121,12 @@ const MessageList = ({
           </IconButton>
         </Box>
 
-        <Box  px={{ lg: "15px", xs: "7px" }} display="flex" justifyContent="space-between" mt="14px">
+        <Box
+          px={{ lg: "15px", xs: "7px" }}
+          display="flex"
+          justifyContent="space-between"
+          mt="14px"
+        >
           <SearchCompo onChange={handleChange} value={searchValue}>
             <SearchBox type="text" placeholder="Search..." />
             <i
@@ -134,7 +143,12 @@ const MessageList = ({
           </SearchCompo>
         </Box>
 
-        <Box px={{ lg: "15px", xs: "7px" }} display="flex" justifyContent="space-between" mt="15px">
+        <Box
+          px={{ lg: "15px", xs: "7px" }}
+          display="flex"
+          justifyContent="space-between"
+          mt="15px"
+        >
           <Stack direction="row" spacing={1}>
             <Button
               onClick={() => setSelectedCategory("All")}
@@ -169,8 +183,8 @@ const MessageList = ({
             </Button>
           </Stack>
         </Box>
-        <Stack overflow="auto" mt="1rem">
-          {isLoadingChats ? (
+        <Stack overflow="auto" mt="1rem" height="100%">
+          {isLoadingChats? (
             <Loader />
           ) : dataLoaded && getFilteredChats()?.length === 0 ? (
             <Stack color={mainColor} padding="20px" textAlign="center">
