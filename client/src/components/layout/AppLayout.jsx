@@ -125,7 +125,7 @@ const AppLayout = (WrappedComponent) => {
         />
         <Drawer open={isMobileMenuOpen} onClose={handleMobileMenuClose}>
           <MessageList
-            w="70vw"
+            w="75vw"
             chats={filteredChats}
             chatId={chatId}
             newMessagesAlert={newMessageAlerts}
