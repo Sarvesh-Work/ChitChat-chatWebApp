@@ -87,7 +87,7 @@ function MessageItems({
   }, [time]);
 
   return (
-    <Stack height="100%" width="100%">
+    <Stack  width="100%">
       <Link
         to={`/messages/${_id}`}
         onContextMenu={(e) => handleDeleteChat(e, _id, groupChat, name)}
