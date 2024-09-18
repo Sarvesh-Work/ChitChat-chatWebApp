@@ -86,7 +86,9 @@ function Profile() {
   return (
     <Dialog open={isProfileOpen} onClose={handleClose}>
       {isLoadingEditProfile ? (
-        <Loader />
+        <Stack width="26rem" height="30rem">
+          <Loader />
+        </Stack>
       ) : (
         <Stack
           sx={{

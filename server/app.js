@@ -11,7 +11,7 @@ import userRoutes from "./routes/user.routes.js";
 import { setupSocketEvents } from "./Socket/index.js";
 
 const corsOptions = {
-  origin: ["http://localhost:5174", process.env.FRONTEND_PORT],
+  origin: ["http://localhost:5173", process.env.FRONTEND_PORT],
   credentials: true,
 };
 
