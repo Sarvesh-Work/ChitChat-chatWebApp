@@ -120,7 +120,4 @@ Make sure you have the following installed:
     npm run dev
     ```
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 7d7f4cf214c79d32c6737b6ac849ce288cfb852b
